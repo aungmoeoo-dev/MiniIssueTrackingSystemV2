@@ -8,7 +8,7 @@ namespace MiniIssueTrackingSystemV2.Database.Models;
 
 public class IssueModel
 {
-	public int Id { get; private set; }
+	public string Id { get; private set; }
 	public string Title { get; private set; }
 	public string Description { get; private set; }
 	public string CreatedBy { get; private set; }
