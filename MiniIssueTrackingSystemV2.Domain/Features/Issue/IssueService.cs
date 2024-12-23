@@ -24,6 +24,7 @@ public class IssueService : IIssueService
 		IssueCreateResponseModel responseModel = new();
 
 		requestModel.Id = Guid.NewGuid().ToString();
+		requestModel.Status = IssueStatus.Open;
 		_db.Issues.Add(requestModel);
 		int result = await _db.SaveChangesAsync();
 
