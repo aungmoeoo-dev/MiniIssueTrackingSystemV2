@@ -14,9 +14,10 @@ public class AppDbContext : DbContext
 	private readonly SqlConnectionStringBuilder _connectionStringBuilder = new()
 	{
 		DataSource = ".",
-		InitialCatalog = "",
+		InitialCatalog = "MiniIssueTrackingSystemV2DB",
 		UserID = "sa",
-		Password = "Aa145156167!"
+		Password = "Aa145156167!",
+		TrustServerCertificate = true
 	};
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
