@@ -1,0 +1,33 @@
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using MiniIssueTrackingSystemV2.Database.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MiniIssueTrackingSystemV2.Database;
+
+public class AppDbContext : DbContext
+{
+	private readonly SqlConnectionStringBuilder _connectionStringBuilder = new()
+	{
+		DataSource = ".",
+		InitialCatalog = "",
+		UserID = "sa",
+		Password = "Aa145156167!"
+	};
+
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
+		if(!optionsBuilder.IsConfigured)
+		{
+			optionsBuilder.UseSqlServer(_connectionStringBuilder.ConnectionString);
+		}
+	}
+
+	public DbSet<UserModel> Users { get; set; }
+	public DbSet<IssueModel> Issues { get; set; }
+	public DbSet<CommentModel> Comments { get; set; }
+}
