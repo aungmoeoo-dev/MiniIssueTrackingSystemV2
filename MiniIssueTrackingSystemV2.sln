@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniIssueTrackingSystemV2.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniIssueTrackingSystemV2.RestApi", "MiniIssueTrackingSystemV2.RestApi\MiniIssueTrackingSystemV2.RestApi.csproj", "{AC5A8DA2-8CFB-4339-8642-9C77A7F3C18F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniIssueTrackingSystemV2.MinimalApi", "MiniIssueTrackingSystemV2.MinimalApi\MiniIssueTrackingSystemV2.MinimalApi.csproj", "{F271F625-937A-4116-8634-2AC145F99E52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AC5A8DA2-8CFB-4339-8642-9C77A7F3C18F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC5A8DA2-8CFB-4339-8642-9C77A7F3C18F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC5A8DA2-8CFB-4339-8642-9C77A7F3C18F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F271F625-937A-4116-8634-2AC145F99E52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F271F625-937A-4116-8634-2AC145F99E52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F271F625-937A-4116-8634-2AC145F99E52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F271F625-937A-4116-8634-2AC145F99E52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
