@@ -5,6 +5,10 @@ VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniIssueTrackingSystemV2.Database", "MiniIssueTrackingSystemV2.Database\MiniIssueTrackingSystemV2.Database.csproj", "{6D5E67A4-0D17-4235-A24F-166B5A576327}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniIssueTrackingSystemV2.Domain", "MiniIssueTrackingSystemV2.Domain\MiniIssueTrackingSystemV2.Domain.csproj", "{271049DC-A1B8-4E04-AC25-8967B12EE53D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniIssueTrackingSystemV2.RestApi", "MiniIssueTrackingSystemV2.RestApi\MiniIssueTrackingSystemV2.RestApi.csproj", "{AC5A8DA2-8CFB-4339-8642-9C77A7F3C18F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6D5E67A4-0D17-4235-A24F-166B5A576327}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D5E67A4-0D17-4235-A24F-166B5A576327}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D5E67A4-0D17-4235-A24F-166B5A576327}.Release|Any CPU.Build.0 = Release|Any CPU
+		{271049DC-A1B8-4E04-AC25-8967B12EE53D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{271049DC-A1B8-4E04-AC25-8967B12EE53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{271049DC-A1B8-4E04-AC25-8967B12EE53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{271049DC-A1B8-4E04-AC25-8967B12EE53D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC5A8DA2-8CFB-4339-8642-9C77A7F3C18F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC5A8DA2-8CFB-4339-8642-9C77A7F3C18F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC5A8DA2-8CFB-4339-8642-9C77A7F3C18F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC5A8DA2-8CFB-4339-8642-9C77A7F3C18F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
