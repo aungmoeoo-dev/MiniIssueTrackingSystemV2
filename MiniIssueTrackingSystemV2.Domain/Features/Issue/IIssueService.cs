@@ -5,8 +5,9 @@ namespace MiniIssueTrackingSystemV2.Domain.Features.Issue
 {
 	public interface IIssueService
 	{
+		Task<IssueListResponseModel> GetIssues();
 		Task<IssueResponseModel> AssignIssue(IssueModel requestModel);
-		Task<IssueResponseModel> ChangeStatus(IssueModel requestModel);
+		Task<IssueResponseModel> ChangeIssueStatus(IssueModel requestModel);
 		Task<IssueCreateResponseModel> CreateIssue(IssueModel requestModel);
 	}
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MiniIssueTrackingSystemV2.Domain.Features.User.Model;
 
-public class UserRegisterResponseModel
+public class AuthResponseModel
 {
 	public bool IsSuccess { get; set; }
 	public string Message { get; set; }

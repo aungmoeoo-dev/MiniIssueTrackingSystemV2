@@ -19,6 +19,26 @@ namespace MiniIssueTrackingSystemV2.RestApi.Features.Comment
 			_commentService = new CommentService();
 		}
 
+		[HttpGet]
+		public async Task<IActionResult> GetComments()
+		{
+			CommentListResponseModel responseModel = new();
+
+			try
+			{
+				responseModel = await _commentService.GetComments();
+				if (!responseModel.IsSuccess) return BadRequest(responseModel);
+
+				return Ok(responseModel);
+			}
+			catch (Exception ex)
+			{
+				responseModel.IsSuccess = false;
+				responseModel.Message = ex.ToString();
+				return StatusCode(500, responseModel);
+			}
+		}
+
 		[HttpPost]
 		public async Task<IActionResult> CreateComment([FromBody] CommentModel requestModel)
 		{

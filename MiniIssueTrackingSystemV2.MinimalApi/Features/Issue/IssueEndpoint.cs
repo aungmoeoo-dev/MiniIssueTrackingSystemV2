@@ -9,6 +9,29 @@ public static class UserEndpoint
 {
 	public static IEndpointRouteBuilder UseIssueEndpoint(this IEndpointRouteBuilder app)
 	{
+		app.MapGet("api/issue", async () =>
+		{
+			IssueListResponseModel responseModel = new();
+
+			IIssueService issueService = new IssueService();
+
+			try
+			{
+				responseModel = await issueService.GetIssues();
+				if (!responseModel.IsSuccess) return Results.BadRequest(responseModel);
+
+				return Results.Ok(responseModel);
+			}
+			catch (Exception ex)
+			{
+				responseModel.IsSuccess = false;
+				responseModel.Message = ex.ToString();
+				return Results.Json(responseModel, statusCode: 500);
+			}
+		})
+		.WithName("Get issues")
+		.WithOpenApi();
+
 		app.MapPost("api/issue", async ([FromBody] IssueModel requestModel) =>
 		{
 			IssueCreateResponseModel responseModel = new();
@@ -18,15 +41,15 @@ public static class UserEndpoint
 			try
 			{
 				responseModel = await issueService.CreateIssue(requestModel);
-				if (!responseModel.IsSuccess) Results.BadRequest(responseModel);
+				if (!responseModel.IsSuccess) return Results.BadRequest(responseModel);
 
-				Results.Ok(responseModel);
+				return Results.Ok(responseModel);
 			}
 			catch (Exception ex)
 			{
 				responseModel.IsSuccess = false;
 				responseModel.Message = ex.ToString();
-				Results.Json(responseModel, statusCode: 500);
+				return Results.Json(responseModel, statusCode: 500);
 			}
 		})
 		.WithName("Create issue")
@@ -41,16 +64,16 @@ public static class UserEndpoint
 			try
 			{
 				requestModel.Id = id;
-				responseModel = await issueService.ChangeStatus(requestModel);
-				if (!responseModel.IsSuccess) Results.BadRequest(responseModel);
+				responseModel = await issueService.ChangeIssueStatus(requestModel);
+				if (!responseModel.IsSuccess) return Results.BadRequest(responseModel);
 
-				Results.Ok(responseModel);
+				return Results.Ok(responseModel);
 			}
 			catch (Exception ex)
 			{
 				responseModel.IsSuccess = false;
 				responseModel.Message = ex.ToString();
-				Results.Json(responseModel, statusCode: 500);
+				return Results.Json(responseModel, statusCode: 500);
 			}
 		})
 		.WithName("Update issue status")
@@ -66,15 +89,15 @@ public static class UserEndpoint
 			{
 				requestModel.Id = id;
 				responseModel = await issueService.AssignIssue(requestModel);
-				if (!responseModel.IsSuccess) Results.BadRequest(responseModel);
+				if (!responseModel.IsSuccess) return Results.BadRequest(responseModel);
 
-				Results.Ok(responseModel);
+				return Results.Ok(responseModel);
 			}
 			catch (Exception ex)
 			{
 				responseModel.IsSuccess = false;
 				responseModel.Message = ex.ToString();
-				Results.Json(responseModel, statusCode: 500);
+				return Results.Json(responseModel, statusCode: 500);
 			}
 		})
 		.WithName("Update issue assign")

@@ -20,7 +20,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseUserEndpoint();
+app.UseAuthEndpoint();
 
 app.UseIssueEndpoint();
 

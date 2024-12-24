@@ -5,6 +5,7 @@ namespace MiniIssueTrackingSystemV2.Domain.Features.Comment
 {
 	public interface ICommentService
 	{
+		Task<CommentListResponseModel> GetComments();
 		Task<CommentResponseModel> CreateComment(CommentModel requestModel);
 		Task<CommentResponseModel> UpdateComment(CommentModel requestModel);
 	}

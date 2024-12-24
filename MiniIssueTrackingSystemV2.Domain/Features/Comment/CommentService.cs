@@ -2,6 +2,7 @@
 using MiniIssueTrackingSystemV2.Database;
 using MiniIssueTrackingSystemV2.Database.Models;
 using MiniIssueTrackingSystemV2.Domain.Features.Comment.Model;
+using MiniIssueTrackingSystemV2.Domain.Features.Issue.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,17 @@ public class CommentService : ICommentService
 		responseModel.IsSuccess = result > 0;
 		responseModel.Message = result > 0 ? "Comment creation successful." : "Comment creation failed.";
 		responseModel.Data = result > 0 ? requestModel : null;
+		return responseModel;
+	}
+
+	public async Task<CommentListResponseModel> GetComments()
+	{
+		CommentListResponseModel responseModel = new();
+		var list = await _db.Comments.AsNoTracking().ToListAsync();
+
+		responseModel.IsSuccess = true;
+		responseModel.Message = "Success";
+		responseModel.Data = list;
 		return responseModel;
 	}
 

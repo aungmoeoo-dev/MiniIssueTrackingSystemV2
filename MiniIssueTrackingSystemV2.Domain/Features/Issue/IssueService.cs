@@ -34,7 +34,7 @@ public class IssueService : IIssueService
 		return responseModel;
 	}
 
-	public async Task<IssueResponseModel> ChangeStatus(IssueModel requestModel)
+	public async Task<IssueResponseModel> ChangeIssueStatus(IssueModel requestModel)
 	{
 		IssueResponseModel responseModel = new();
 
@@ -98,5 +98,16 @@ public class IssueService : IIssueService
 		responseModel.Message = result > 0 ? "Issue assignment successful" : "Issue assignment failed.";
 		return responseModel;
 
+	}
+
+	public async Task<IssueListResponseModel> GetIssues()
+	{
+		IssueListResponseModel responseModel = new();
+		var list = await _db.Issues.AsNoTracking().ToListAsync();
+
+		responseModel.IsSuccess = true;
+		responseModel.Message = "Success";
+		responseModel.Data = list;
+		return responseModel;
 	}
 }

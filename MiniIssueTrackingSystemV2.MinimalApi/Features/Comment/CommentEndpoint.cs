@@ -9,6 +9,29 @@ public static class CommentEndpoint
 {
 	public static IEndpointRouteBuilder UseCommentEndpoint(this IEndpointRouteBuilder app)
 	{
+		app.MapGet("api/comment", async () =>
+		{
+			CommentListResponseModel responseModel = new();
+
+			ICommentService commentService = new CommentService();
+
+			try
+			{
+				responseModel = await commentService.GetComments();
+				if (!responseModel.IsSuccess) return Results.BadRequest(responseModel);
+
+				return Results.Ok(responseModel);
+			}
+			catch (Exception ex)
+			{
+				responseModel.IsSuccess = false;
+				responseModel.Message = ex.ToString();
+				return Results.Json(responseModel, statusCode: 500);
+			}
+		})
+		.WithName("Get comments")
+		.WithOpenApi();
+
 		app.MapPost("api/comment", async ([FromBody] CommentModel requestModel) =>
 		{
 			 CommentResponseModel responseModel = new();
@@ -18,15 +41,15 @@ public static class CommentEndpoint
 			try
 			{
 				responseModel = await commentService.CreateComment(requestModel);
-				if (!responseModel.IsSuccess) Results.BadRequest(responseModel);
+				if (!responseModel.IsSuccess) return Results.BadRequest(responseModel);
 
-				Results.Ok(responseModel);
+				return Results.Ok(responseModel);
 			}
 			catch (Exception ex)
 			{
 				responseModel.IsSuccess = false;
 				responseModel.Message = ex.ToString();
-				Results.Json(responseModel, statusCode: 500);
+				return Results.Json(responseModel, statusCode: 500);
 			}
 		})
 		.WithName("Create comment")
@@ -42,15 +65,15 @@ public static class CommentEndpoint
 			{
 				requestModel.Id = id;
 				responseModel = await commentService.UpdateComment(requestModel);
-				if (!responseModel.IsSuccess) Results.BadRequest(responseModel);
+				if (!responseModel.IsSuccess) return Results.BadRequest(responseModel);
 
-				Results.Ok(responseModel);
+				return Results.Ok(responseModel);
 			}
 			catch (Exception ex)
 			{
 				responseModel.IsSuccess = false;
 				responseModel.Message = ex.ToString();
-				Results.Json(responseModel, statusCode: 500);
+				return Results.Json(responseModel, statusCode: 500);
 			}
 		})
 		.WithName("Update comment")

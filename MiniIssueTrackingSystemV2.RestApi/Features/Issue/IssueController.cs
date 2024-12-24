@@ -19,6 +19,26 @@ public class IssueController : ControllerBase
 		_issueService = new IssueService();
 	}
 
+	[HttpGet]
+	public async Task<IActionResult> GetIssues()
+	{
+		IssueListResponseModel responseModel = new();
+
+		try
+		{
+			responseModel = await _issueService.GetIssues();
+			if (!responseModel.IsSuccess) return BadRequest(responseModel);
+
+			return Ok(responseModel);
+		}
+		catch (Exception ex)
+		{
+			responseModel.IsSuccess = false;
+			responseModel.Message = ex.ToString();
+			return StatusCode(500, responseModel);
+		}
+	}
+
 	[HttpPost]
 	public async Task<IActionResult> CreateIssue([FromBody] IssueModel requestModel)
 	{
@@ -40,14 +60,14 @@ public class IssueController : ControllerBase
 	}
 
 	[HttpPatch("status/{id}")]
-	public async Task<IActionResult> ChangeStatus(string id, [FromBody] IssueModel requestModel)
+	public async Task<IActionResult> ChangeIssueStatus(string id, [FromBody] IssueModel requestModel)
 	{
 		IssueResponseModel responseModel = new();
 
 		try
 		{
 			requestModel.Id = id;
-			responseModel = await _issueService.ChangeStatus(requestModel);
+			responseModel = await _issueService.ChangeIssueStatus(requestModel);
 			if (!responseModel.IsSuccess) return BadRequest(responseModel);
 
 			return Ok(responseModel);
