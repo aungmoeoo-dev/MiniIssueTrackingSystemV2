@@ -1,11 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using MiniIssueTrackingSystemV2.Database.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MiniIssueTrackingSystemV2.Database;
 
@@ -28,7 +23,7 @@ public class AppDbContext : DbContext
 		}
 	}
 
-	public DbSet<UserModel> Users { get; set; }
-	public DbSet<IssueModel> Issues { get; set; }
-	public DbSet<CommentModel> Comments { get; set; }
+	public DbSet<TBLUser> Users { get; set; }
+	public DbSet<TBLIssue> Issues { get; set; }
+	public DbSet<TBLComment> Comments { get; set; }
 }

@@ -13,7 +13,7 @@ public static class CommentEndpoint
 		{
 			CommentListResponseModel responseModel = new();
 
-			ICommentService commentService = new CommentService();
+			CommentService commentService = new CommentService();
 
 			try
 			{
@@ -32,11 +32,11 @@ public static class CommentEndpoint
 		.WithName("Get comments")
 		.WithOpenApi();
 
-		app.MapPost("api/comment", async ([FromBody] CommentModel requestModel) =>
+		app.MapPost("api/comment", async ([FromBody] TBLComment requestModel) =>
 		{
 			 CommentResponseModel responseModel = new();
 
-			ICommentService commentService = new CommentService();
+			CommentService commentService = new CommentService();
 
 			try
 			{
@@ -55,11 +55,11 @@ public static class CommentEndpoint
 		.WithName("Create comment")
 		.WithOpenApi();
 
-		app.MapPatch("api/comment/{id}", async (string id, [FromBody] CommentModel requestModel) =>
+		app.MapPatch("api/comment/{id}", async (string id, [FromBody] TBLComment requestModel) =>
 		{
 			CommentResponseModel responseModel = new();
 
-			ICommentService commentService = new CommentService();
+			CommentService commentService = new CommentService();
 
 			try
 			{

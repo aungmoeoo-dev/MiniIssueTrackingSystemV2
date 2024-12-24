@@ -1,16 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniIssueTrackingSystemV2.Database;
 using MiniIssueTrackingSystemV2.Database.Models;
-using MiniIssueTrackingSystemV2.Domain.Features.User.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MiniIssueTrackingSystemV2.Domain.Features.Auth.Model;
 
 namespace MiniIssueTrackingSystemV2.Domain.Features.Auth;
 
-public class AuthService : IAuthService
+public class AuthService
 {
 	private readonly AppDbContext _db;
 
@@ -19,7 +14,7 @@ public class AuthService : IAuthService
 		_db = new AppDbContext();
 	}
 
-	public async Task<AuthResponseModel> RegisterUser(UserModel requestModel)
+	public async Task<AuthResponseModel> RegisterUser(TBLUser requestModel)
 	{
 		AuthResponseModel responseModel = new();
 
@@ -33,7 +28,7 @@ public class AuthService : IAuthService
 		return responseModel;
 	}
 
-	public async Task<AuthResponseModel> LoginUser(UserModel requestModel)
+	public async Task<AuthResponseModel> LoginUser(TBLUser requestModel)
 	{
 		AuthResponseModel responseModel = new();
 

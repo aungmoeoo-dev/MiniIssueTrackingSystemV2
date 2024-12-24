@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MiniIssueTrackingSystemV2.Database.Models;
 using MiniIssueTrackingSystemV2.Domain.Features.Comment;
 using MiniIssueTrackingSystemV2.Domain.Features.Comment.Model;
-using MiniIssueTrackingSystemV2.Domain.Features.Issue;
-using MiniIssueTrackingSystemV2.Domain.Features.User.Model;
 
 namespace MiniIssueTrackingSystemV2.RestApi.Features.Comment
 {
@@ -12,7 +10,7 @@ namespace MiniIssueTrackingSystemV2.RestApi.Features.Comment
 	[ApiController]
 	public class CommentController : ControllerBase
 	{
-		private readonly ICommentService _commentService;
+		private readonly CommentService _commentService;
 
 		public CommentController()
 		{
@@ -40,7 +38,7 @@ namespace MiniIssueTrackingSystemV2.RestApi.Features.Comment
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> CreateComment([FromBody] CommentModel requestModel)
+		public async Task<IActionResult> CreateComment([FromBody] TBLComment requestModel)
 		{
 			CommentResponseModel responseModel = new();
 
@@ -60,7 +58,7 @@ namespace MiniIssueTrackingSystemV2.RestApi.Features.Comment
 		}
 
 		[HttpPatch("{id}")]
-		public async Task<IActionResult> UpdateComment(string id, [FromBody] CommentModel requestModel)
+		public async Task<IActionResult> UpdateComment(string id, [FromBody] TBLComment requestModel)
 		{
 			CommentResponseModel responseModel = new();
 

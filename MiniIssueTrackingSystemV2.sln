@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35527.113 d17.12
+VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniIssueTrackingSystemV2.Database", "MiniIssueTrackingSystemV2.Database\MiniIssueTrackingSystemV2.Database.csproj", "{6D5E67A4-0D17-4235-A24F-166B5A576327}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniIssueTrackingSystemV2.RestApi", "MiniIssueTrackingSystemV2.RestApi\MiniIssueTrackingSystemV2.RestApi.csproj", "{AC5A8DA2-8CFB-4339-8642-9C77A7F3C18F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniIssueTrackingSystemV2.MinimalApi", "MiniIssueTrackingSystemV2.MinimalApi\MiniIssueTrackingSystemV2.MinimalApi.csproj", "{F271F625-937A-4116-8634-2AC145F99E52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniIssueTrackingSystemV2.ConsoleApp", "MiniIssueTrackingSystemV2.ConsoleApp\MiniIssueTrackingSystemV2.ConsoleApp.csproj", "{0C22821E-7759-403F-B528-BEAC10D1BD36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F271F625-937A-4116-8634-2AC145F99E52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F271F625-937A-4116-8634-2AC145F99E52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F271F625-937A-4116-8634-2AC145F99E52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C22821E-7759-403F-B528-BEAC10D1BD36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C22821E-7759-403F-B528-BEAC10D1BD36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C22821E-7759-403F-B528-BEAC10D1BD36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C22821E-7759-403F-B528-BEAC10D1BD36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

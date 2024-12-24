@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 namespace MiniIssueTrackingSystemV2.Database.Models;
 
 [Table("TBL_Comment")]
-public class CommentModel
+public class TBLComment
 {
 	[Key]
 	public string? Id { get; set; }
+	public string? IssueId { get; set; }
 	public string? Text { get; set; }
 	public string? CreatedBy { get; set; }
 }

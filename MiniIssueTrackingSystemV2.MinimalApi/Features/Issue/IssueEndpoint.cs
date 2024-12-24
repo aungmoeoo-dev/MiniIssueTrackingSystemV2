@@ -13,7 +13,7 @@ public static class UserEndpoint
 		{
 			IssueListResponseModel responseModel = new();
 
-			IIssueService issueService = new IssueService();
+			IssueService issueService = new IssueService();
 
 			try
 			{
@@ -32,11 +32,11 @@ public static class UserEndpoint
 		.WithName("Get issues")
 		.WithOpenApi();
 
-		app.MapPost("api/issue", async ([FromBody] IssueModel requestModel) =>
+		app.MapPost("api/issue", async ([FromBody] TBLIssue requestModel) =>
 		{
-			IssueCreateResponseModel responseModel = new();
+			IssueResponseModel responseModel = new();
 
-			IIssueService issueService = new IssueService();
+			IssueService issueService = new IssueService();
 
 			try
 			{
@@ -55,11 +55,11 @@ public static class UserEndpoint
 		.WithName("Create issue")
 		.WithOpenApi();
 
-		app.MapPatch("api/issue/status/{id}", async (string id, [FromBody] IssueModel requestModel) =>
+		app.MapPatch("api/issue/status/{id}", async (string id, [FromBody] TBLIssue requestModel) =>
 		{
 			IssueResponseModel responseModel = new();
 
-			IIssueService issueService = new IssueService();
+			IssueService issueService = new IssueService();
 
 			try
 			{
@@ -79,11 +79,11 @@ public static class UserEndpoint
 		.WithName("Update issue status")
 		.WithOpenApi();
 
-		app.MapPatch("api/issue/assign/{id}", async (string id, [FromBody] IssueModel requestModel) =>
+		app.MapPatch("api/issue/assign/{id}", async (string id, [FromBody] TBLIssue requestModel) =>
 		{
 			IssueResponseModel responseModel = new();
 
-			IIssueService issueService = new IssueService();
+			IssueService issueService = new IssueService();
 
 			try
 			{

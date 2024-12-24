@@ -11,5 +11,5 @@ public class CommentListResponseModel
 {
 	public bool IsSuccess { get; set; }
 	public string Message { get; set; }
-	public List<CommentModel> Data { get; set; }
+	public List<TBLComment> Data { get; set; }
 }

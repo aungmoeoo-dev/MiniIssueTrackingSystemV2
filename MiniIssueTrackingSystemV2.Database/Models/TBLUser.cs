@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace MiniIssueTrackingSystemV2.Database.Models;
 
 [Table("TBL_User")]
-public class UserModel
+public class TBLUser
 {
 	[Key]
 	public string? Id { get; set; }

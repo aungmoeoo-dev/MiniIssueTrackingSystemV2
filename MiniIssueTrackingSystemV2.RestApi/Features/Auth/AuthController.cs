@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MiniIssueTrackingSystemV2.Database.Models;
 using MiniIssueTrackingSystemV2.Domain.Features.Auth;
-using MiniIssueTrackingSystemV2.Domain.Features.User.Model;
+using MiniIssueTrackingSystemV2.Domain.Features.Auth.Model;
 
 namespace MiniIssueTrackingSystemV2.RestApi.Features.User;
 
@@ -10,7 +10,7 @@ namespace MiniIssueTrackingSystemV2.RestApi.Features.User;
 [ApiController]
 public class AuthController : ControllerBase
 {
-	private readonly IAuthService _userService;
+	private readonly AuthService _userService;
 
 	public AuthController()
 	{
@@ -18,7 +18,7 @@ public class AuthController : ControllerBase
 	}
 
 	[HttpPost("Register")]
-	public async Task<IActionResult> RegisterUser([FromBody] UserModel requestModel)
+	public async Task<IActionResult> RegisterUser([FromBody] TBLUser requestModel)
 	{
 		AuthResponseModel responseModel = new();
 
@@ -38,7 +38,7 @@ public class AuthController : ControllerBase
 	}
 
 	[HttpPost("Login")]
-	public async Task<IActionResult> LoginUser([FromBody] UserModel requestModel)
+	public async Task<IActionResult> LoginUser([FromBody] TBLUser requestModel)
 	{
 		AuthResponseModel responseModel = new();
 

@@ -1,6 +1,6 @@
+using MiniIssueTrackingSystemV2.MinimalApi.Features.Auth;
 using MiniIssueTrackingSystemV2.MinimalApi.Features.Comment;
 using MiniIssueTrackingSystemV2.MinimalApi.Features.Issue;
-using MiniIssueTrackingSystemV2.MinimalApi.Features.User;
 
 var builder = WebApplication.CreateBuilder(args);
 

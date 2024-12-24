@@ -2,15 +2,10 @@
 using MiniIssueTrackingSystemV2.Database;
 using MiniIssueTrackingSystemV2.Database.Models;
 using MiniIssueTrackingSystemV2.Domain.Features.Issue.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MiniIssueTrackingSystemV2.Domain.Features.Issue;
 
-public class IssueService : IIssueService
+public class IssueService
 {
 	private readonly AppDbContext _db;
 
@@ -19,9 +14,9 @@ public class IssueService : IIssueService
 		_db = new AppDbContext();
 	}
 
-	public async Task<IssueCreateResponseModel> CreateIssue(IssueModel requestModel)
+	public async Task<IssueResponseModel> CreateIssue(TBLIssue requestModel)
 	{
-		IssueCreateResponseModel responseModel = new();
+		IssueResponseModel responseModel = new();
 
 		requestModel.Id = Guid.NewGuid().ToString();
 		requestModel.Status = IssueStatus.Open;
@@ -30,11 +25,29 @@ public class IssueService : IIssueService
 
 		responseModel.IsSuccess = result > 0;
 		responseModel.Message = result > 0 ? "Issue creation successful." : "User creation failed.";
-		responseModel.Data = result > 0 ? requestModel : null;
+
+		TBLUser createdByUser = await _db.Users.FirstOrDefaultAsync(x => x.Id == requestModel.CreatedBy);
+		if (createdByUser is null)
+		{
+			responseModel.IsSuccess = false;
+			responseModel.Message = "User does not exist.";
+			return responseModel;
+		}
+
+		TBLIssue issueModel = new()
+		{
+			Id = requestModel.Id,
+			Title = requestModel.Title!,
+			Description = requestModel.Description!,
+			CreatedBy = createdByUser.Id,
+			Status = IssueStatus.Open,
+		};
+
+		responseModel.Data = result > 0 ? issueModel : null;
 		return responseModel;
 	}
 
-	public async Task<IssueResponseModel> ChangeIssueStatus(IssueModel requestModel)
+	public async Task<IssueResponseModel> ChangeIssueStatus(TBLIssue requestModel)
 	{
 		IssueResponseModel responseModel = new();
 
@@ -70,7 +83,7 @@ public class IssueService : IIssueService
 		return responseModel;
 	}
 
-	public async Task<IssueResponseModel> AssignIssue(IssueModel requestModel)
+	public async Task<IssueResponseModel> AssignIssue(TBLIssue requestModel)
 	{
 		IssueResponseModel responseModel = new();
 
@@ -103,7 +116,8 @@ public class IssueService : IIssueService
 	public async Task<IssueListResponseModel> GetIssues()
 	{
 		IssueListResponseModel responseModel = new();
-		var list = await _db.Issues.AsNoTracking().ToListAsync();
+
+		var list = await _db.Issues.ToListAsync();
 
 		responseModel.IsSuccess = true;
 		responseModel.Message = "Success";

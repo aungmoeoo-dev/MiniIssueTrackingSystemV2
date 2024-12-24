@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using MiniIssueTrackingSystemV2.Database.Models;
 using MiniIssueTrackingSystemV2.Domain.Features.Issue;
 using MiniIssueTrackingSystemV2.Domain.Features.Issue.Model;
-using MiniIssueTrackingSystemV2.Domain.Features.User;
-using MiniIssueTrackingSystemV2.Domain.Features.User.Model;
 
 namespace MiniIssueTrackingSystemV2.RestApi.Features.Issue;
 
@@ -12,7 +10,7 @@ namespace MiniIssueTrackingSystemV2.RestApi.Features.Issue;
 [ApiController]
 public class IssueController : ControllerBase
 {
-	private readonly IIssueService _issueService;
+	private readonly IssueService _issueService;
 
 	public IssueController()
 	{
@@ -40,9 +38,9 @@ public class IssueController : ControllerBase
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> CreateIssue([FromBody] IssueModel requestModel)
+	public async Task<IActionResult> CreateIssue([FromBody] TBLIssue requestModel)
 	{
-		IssueCreateResponseModel responseModel = new();
+		IssueResponseModel responseModel = new();
 
 		try
 		{
@@ -60,7 +58,7 @@ public class IssueController : ControllerBase
 	}
 
 	[HttpPatch("status/{id}")]
-	public async Task<IActionResult> ChangeIssueStatus(string id, [FromBody] IssueModel requestModel)
+	public async Task<IActionResult> ChangeIssueStatus(string id, [FromBody] TBLIssue requestModel)
 	{
 		IssueResponseModel responseModel = new();
 
@@ -81,7 +79,7 @@ public class IssueController : ControllerBase
 	}
 
 	[HttpPatch("assign/{id}")]
-	public async Task<IActionResult> AssignIssue(string id, [FromBody] IssueModel requestModel)
+	public async Task<IActionResult> AssignIssue(string id, [FromBody] TBLIssue requestModel)
 	{
 		IssueResponseModel responseModel = new();
 

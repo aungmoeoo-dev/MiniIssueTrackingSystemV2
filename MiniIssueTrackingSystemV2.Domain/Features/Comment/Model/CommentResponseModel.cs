@@ -11,5 +11,5 @@ public class CommentResponseModel
 {
 	public bool IsSuccess { get; set; }
 	public string Message { get; set; }
-	public CommentModel Data { get; set; }
+	public TBLComment Data { get; set; }
 }

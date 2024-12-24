@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MiniIssueTrackingSystemV2.Domain.Features.Comment;
 
-public class CommentService : ICommentService
+public class CommentService
 {
 	private readonly AppDbContext _db;
 
@@ -20,7 +20,7 @@ public class CommentService : ICommentService
 		_db = new AppDbContext();
 	}
 
-	public async Task<CommentResponseModel> CreateComment(CommentModel requestModel)
+	public async Task<CommentResponseModel> CreateComment(TBLComment requestModel)
 	{
 		CommentResponseModel responseModel = new();
 
@@ -45,7 +45,7 @@ public class CommentService : ICommentService
 		return responseModel;
 	}
 
-	public async Task<CommentResponseModel> UpdateComment(CommentModel requestModel)
+	public async Task<CommentResponseModel> UpdateComment(TBLComment requestModel)
 	{
 		CommentResponseModel responseModel = new();
 
