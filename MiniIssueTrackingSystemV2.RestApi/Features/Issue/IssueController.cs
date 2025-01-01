@@ -38,7 +38,7 @@ public class IssueController : ControllerBase
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> CreateIssue([FromBody] TBLIssue requestModel)
+	public async Task<IActionResult> CreateIssue([FromBody] IssueModel requestModel)
 	{
 		IssueResponseModel responseModel = new();
 
@@ -58,7 +58,7 @@ public class IssueController : ControllerBase
 	}
 
 	[HttpPatch("status/{id}")]
-	public async Task<IActionResult> ChangeIssueStatus(string id, [FromBody] TBLIssue requestModel)
+	public async Task<IActionResult> ChangeIssueStatus(string id, [FromBody] IssueModel requestModel)
 	{
 		IssueResponseModel responseModel = new();
 
@@ -79,7 +79,7 @@ public class IssueController : ControllerBase
 	}
 
 	[HttpPatch("assign/{id}")]
-	public async Task<IActionResult> AssignIssue(string id, [FromBody] TBLIssue requestModel)
+	public async Task<IActionResult> AssignIssue(string id, [FromBody] IssueModel requestModel)
 	{
 		IssueResponseModel responseModel = new();
 

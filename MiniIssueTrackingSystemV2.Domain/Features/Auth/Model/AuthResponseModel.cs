@@ -11,5 +11,5 @@ public class AuthResponseModel
 {
 	public bool IsSuccess { get; set; }
 	public string Message { get; set; }
-	public TBLUser Data { get; set; }
+	public UserModel Data { get; set; }
 }

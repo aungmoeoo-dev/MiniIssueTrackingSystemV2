@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MiniIssueTrackingSystemV2.Database.Models;
 
 [Table("TBL_Issue")]
-public class TBLIssue
+public class IssueModel
 {
 	[Key]
 	public string? Id { get; set; }

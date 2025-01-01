@@ -9,7 +9,7 @@ public static class AuthEndpoint
 {
 	public static IEndpointRouteBuilder UseAuthEndpoint(this IEndpointRouteBuilder app)
 	{
-		app.MapPost("/api/auth/register", async ([FromBody] TBLUser requestModel) =>
+		app.MapPost("/api/auth/register", async ([FromBody] UserModel requestModel) =>
 		{
 			AuthResponseModel responseModel = new();
 
@@ -32,7 +32,7 @@ public static class AuthEndpoint
 		.WithName("Register user")
 		.WithOpenApi();
 
-		app.MapPost("/api/auth/login", async ([FromBody] TBLUser requestModel) =>
+		app.MapPost("/api/auth/login", async ([FromBody] UserModel requestModel) =>
 		{
 			AuthResponseModel responseModel = new();
 

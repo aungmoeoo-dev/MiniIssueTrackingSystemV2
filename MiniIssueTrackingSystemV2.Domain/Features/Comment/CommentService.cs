@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniIssueTrackingSystemV2.Database;
 using MiniIssueTrackingSystemV2.Database.Models;
+using MiniIssueTrackingSystemV2.Domain.Dtos;
 using MiniIssueTrackingSystemV2.Domain.Features.Comment.Model;
 using MiniIssueTrackingSystemV2.Domain.Features.Issue.Model;
+using MiniIssueTrackingSystemV2.Domain.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,32 +22,44 @@ public class CommentService
 		_db = new AppDbContext();
 	}
 
-	public async Task<CommentResponseModel> CreateComment(TBLComment requestModel)
+	public async Task<CommentResponseModel> CreateComment(CommentModel requestModel)
 	{
 		CommentResponseModel responseModel = new();
+
+		var createdBy = await _db.Users.FirstOrDefaultAsync(x => x.Id == requestModel.CreatedBy);
+		if (createdBy is null)
+		{
+			responseModel.IsSuccess = false;
+			responseModel.Message = "User does not exist.";
+			return responseModel;
+		}
 
 		requestModel.Id = Guid.NewGuid().ToString();
 		_db.Comments.Add(requestModel);
 		int result = await _db.SaveChangesAsync();
 
+		CommentDto commentDto = requestModel.ToDto();
+		commentDto.CreatedBy = createdBy.ToDto();
+		
+
 		responseModel.IsSuccess = result > 0;
 		responseModel.Message = result > 0 ? "Comment creation successful." : "Comment creation failed.";
-		responseModel.Data = result > 0 ? requestModel : null;
+		responseModel.Data = result > 0 ? commentDto : null;
 		return responseModel;
 	}
 
-	public async Task<CommentListResponseModel> GetComments()
-	{
-		CommentListResponseModel responseModel = new();
-		var list = await _db.Comments.AsNoTracking().ToListAsync();
+	//public async Task<CommentListResponseModel> GetComments()
+	//{
+	//	CommentListResponseModel responseModel = new();
+	//	var list = await _db.Comments.AsNoTracking().ToListAsync();
 
-		responseModel.IsSuccess = true;
-		responseModel.Message = "Success";
-		responseModel.Data = list;
-		return responseModel;
-	}
+	//	responseModel.IsSuccess = true;
+	//	responseModel.Message = "Success";
+	//	responseModel.Data = list;
+	//	return responseModel;
+	//}
 
-	public async Task<CommentResponseModel> UpdateComment(TBLComment requestModel)
+	public async Task<CommentResponseModel> UpdateComment(CommentModel requestModel)
 	{
 		CommentResponseModel responseModel = new();
 
@@ -78,7 +92,6 @@ public class CommentService
 
 		responseModel.IsSuccess = result > 0;
 		responseModel.Message = result > 0 ? "Comment updating successful." : "Comment updating failed.";
-		responseModel.Data = result > 0 ? comment : null;
 		return responseModel;
 	}
 }

@@ -23,7 +23,7 @@ public class AppDbContext : DbContext
 		}
 	}
 
-	public DbSet<TBLUser> Users { get; set; }
-	public DbSet<TBLIssue> Issues { get; set; }
-	public DbSet<TBLComment> Comments { get; set; }
+	public DbSet<UserModel> Users { get; set; }
+	public DbSet<IssueModel> Issues { get; set; }
+	public DbSet<CommentModel> Comments { get; set; }
 }

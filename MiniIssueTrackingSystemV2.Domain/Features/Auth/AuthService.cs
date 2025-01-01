@@ -14,7 +14,7 @@ public class AuthService
 		_db = new AppDbContext();
 	}
 
-	public async Task<AuthResponseModel> RegisterUser(TBLUser requestModel)
+	public async Task<AuthResponseModel> RegisterUser(UserModel requestModel)
 	{
 		AuthResponseModel responseModel = new();
 
@@ -28,7 +28,7 @@ public class AuthService
 		return responseModel;
 	}
 
-	public async Task<AuthResponseModel> LoginUser(TBLUser requestModel)
+	public async Task<AuthResponseModel> LoginUser(UserModel requestModel)
 	{
 		AuthResponseModel responseModel = new();
 

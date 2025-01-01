@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniIssueTrackingSystemV2.Database;
 using MiniIssueTrackingSystemV2.Database.Models;
+using MiniIssueTrackingSystemV2.Domain.Dtos;
 using MiniIssueTrackingSystemV2.Domain.Features.Issue.Model;
+using MiniIssueTrackingSystemV2.Domain.Util;
 
 namespace MiniIssueTrackingSystemV2.Domain.Features.Issue;
 
@@ -14,7 +16,7 @@ public class IssueService
 		_db = new AppDbContext();
 	}
 
-	public async Task<IssueResponseModel> CreateIssue(TBLIssue requestModel)
+	public async Task<IssueResponseModel> CreateIssue(IssueModel requestModel)
 	{
 		IssueResponseModel responseModel = new();
 
@@ -26,7 +28,7 @@ public class IssueService
 		responseModel.IsSuccess = result > 0;
 		responseModel.Message = result > 0 ? "Issue creation successful." : "User creation failed.";
 
-		TBLUser createdByUser = await _db.Users.FirstOrDefaultAsync(x => x.Id == requestModel.CreatedBy);
+		UserModel createdByUser = await _db.Users.FirstOrDefaultAsync(x => x.Id == requestModel.CreatedBy);
 		if (createdByUser is null)
 		{
 			responseModel.IsSuccess = false;
@@ -34,20 +36,20 @@ public class IssueService
 			return responseModel;
 		}
 
-		TBLIssue issueModel = new()
+		IssueDto issueDto = new()
 		{
 			Id = requestModel.Id,
 			Title = requestModel.Title!,
 			Description = requestModel.Description!,
-			CreatedBy = createdByUser.Id,
+			CreatedBy = createdByUser.ToDto(),
 			Status = IssueStatus.Open,
 		};
 
-		responseModel.Data = result > 0 ? issueModel : null;
+		responseModel.Data = result > 0 ? issueDto : null;
 		return responseModel;
 	}
 
-	public async Task<IssueResponseModel> ChangeIssueStatus(TBLIssue requestModel)
+	public async Task<IssueResponseModel> ChangeIssueStatus(IssueModel requestModel)
 	{
 		IssueResponseModel responseModel = new();
 
@@ -83,7 +85,7 @@ public class IssueService
 		return responseModel;
 	}
 
-	public async Task<IssueResponseModel> AssignIssue(TBLIssue requestModel)
+	public async Task<IssueResponseModel> AssignIssue(IssueModel requestModel)
 	{
 		IssueResponseModel responseModel = new();
 
@@ -117,11 +119,29 @@ public class IssueService
 	{
 		IssueListResponseModel responseModel = new();
 
-		var list = await _db.Issues.ToListAsync();
+		var issuelist = await _db.Issues.ToListAsync();
+
+		List<IssueDto> issueDtoList = new();
+
+		foreach (var issue in issuelist)
+		{
+			var issueDto = issue.ToDto();
+
+			var createdByModel = await _db.Users.FirstOrDefaultAsync(x => x.Id == issue.CreatedBy);
+			issueDto.CreatedBy = createdByModel!.ToDto();
+
+			var assignedToModel = await _db.Users.FirstOrDefaultAsync(x => x.Id == issue.AssignedTo);
+			issueDto.AssignedTo = assignedToModel!.ToDto();
+
+			var commentsModel = await _db.Comments.Where(x => x.IssueId == issue.Id).ToListAsync();
+			issueDto.Comments = await commentsModel.ToDto(async (commentModel) => await _db.Users.FirstOrDefaultAsync(x => x.Id == commentModel.CreatedBy));
+
+			issueDtoList.Add(issueDto);
+		}
 
 		responseModel.IsSuccess = true;
 		responseModel.Message = "Success";
-		responseModel.Data = list;
+		responseModel.Data = issueDtoList;
 		return responseModel;
 	}
 }

@@ -9,30 +9,30 @@ public static class CommentEndpoint
 {
 	public static IEndpointRouteBuilder UseCommentEndpoint(this IEndpointRouteBuilder app)
 	{
-		app.MapGet("api/comment", async () =>
-		{
-			CommentListResponseModel responseModel = new();
+		//app.MapGet("api/comment", async () =>
+		//{
+		//	CommentListResponseModel responseModel = new();
 
-			CommentService commentService = new CommentService();
+		//	CommentService commentService = new CommentService();
 
-			try
-			{
-				responseModel = await commentService.GetComments();
-				if (!responseModel.IsSuccess) return Results.BadRequest(responseModel);
+		//	try
+		//	{
+		//		responseModel = await commentService.GetComments();
+		//		if (!responseModel.IsSuccess) return Results.BadRequest(responseModel);
 
-				return Results.Ok(responseModel);
-			}
-			catch (Exception ex)
-			{
-				responseModel.IsSuccess = false;
-				responseModel.Message = ex.ToString();
-				return Results.Json(responseModel, statusCode: 500);
-			}
-		})
-		.WithName("Get comments")
-		.WithOpenApi();
+		//		return Results.Ok(responseModel);
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		responseModel.IsSuccess = false;
+		//		responseModel.Message = ex.ToString();
+		//		return Results.Json(responseModel, statusCode: 500);
+		//	}
+		//})
+		//.WithName("Get comments")
+		//.WithOpenApi();
 
-		app.MapPost("api/comment", async ([FromBody] TBLComment requestModel) =>
+		app.MapPost("api/comment", async ([FromBody] CommentModel requestModel) =>
 		{
 			 CommentResponseModel responseModel = new();
 
@@ -55,7 +55,7 @@ public static class CommentEndpoint
 		.WithName("Create comment")
 		.WithOpenApi();
 
-		app.MapPatch("api/comment/{id}", async (string id, [FromBody] TBLComment requestModel) =>
+		app.MapPatch("api/comment/{id}", async (string id, [FromBody] CommentModel requestModel) =>
 		{
 			CommentResponseModel responseModel = new();
 

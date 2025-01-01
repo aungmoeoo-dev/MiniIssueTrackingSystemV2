@@ -1,4 +1,5 @@
 ﻿using MiniIssueTrackingSystemV2.Database.Models;
+using MiniIssueTrackingSystemV2.Domain.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,5 @@ public class CommentResponseModel
 {
 	public bool IsSuccess { get; set; }
 	public string Message { get; set; }
-	public TBLComment Data { get; set; }
+	public CommentDto Data { get; set; }
 }

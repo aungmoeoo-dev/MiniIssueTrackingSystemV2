@@ -18,7 +18,7 @@ public class AuthController : ControllerBase
 	}
 
 	[HttpPost("Register")]
-	public async Task<IActionResult> RegisterUser([FromBody] TBLUser requestModel)
+	public async Task<IActionResult> RegisterUser([FromBody] UserModel requestModel)
 	{
 		AuthResponseModel responseModel = new();
 
@@ -38,7 +38,7 @@ public class AuthController : ControllerBase
 	}
 
 	[HttpPost("Login")]
-	public async Task<IActionResult> LoginUser([FromBody] TBLUser requestModel)
+	public async Task<IActionResult> LoginUser([FromBody] UserModel requestModel)
 	{
 		AuthResponseModel responseModel = new();
 
