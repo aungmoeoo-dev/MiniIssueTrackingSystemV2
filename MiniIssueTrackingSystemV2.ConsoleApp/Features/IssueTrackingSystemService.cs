@@ -1,4 +1,5 @@
-﻿using MiniIssueTrackingSystemV2.ConsoleApp.Features.Auth;
+﻿using MiniIssueTrackingSystemV2.ConsoleApp.Dtos;
+using MiniIssueTrackingSystemV2.ConsoleApp.Features.Auth;
 using MiniIssueTrackingSystemV2.ConsoleApp.Features.Comment;
 using MiniIssueTrackingSystemV2.ConsoleApp.Features.Comment.Model;
 using MiniIssueTrackingSystemV2.ConsoleApp.Features.Issue;
@@ -9,7 +10,7 @@ namespace MiniIssueTrackingSystemV2.ConsoleApp.Features
 {
 	public class IssueTrackingSystemService
 	{
-		private UserModel loggedInUser = null;
+		private UserDto loggedInUser = null;
 
 		public async Task Run()
 		{
@@ -157,7 +158,7 @@ namespace MiniIssueTrackingSystemV2.ConsoleApp.Features
 
 			foreach (var issue in response.Data)
 			{
-				Console.WriteLine(issue.Title);
+				Console.WriteLine(issue);
 			}
 		}
 
