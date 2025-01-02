@@ -97,7 +97,7 @@ public class IssueService
 			return responseModel;
 		}
 
-		var assignUser = await _db.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == requestModel.AssignedTo);
+		var assignUser = await _db.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Username == requestModel.AssignedTo);
 		if (assignUser is null)
 		{
 			responseModel.IsSuccess = false;
